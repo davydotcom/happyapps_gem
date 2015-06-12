@@ -26,6 +26,14 @@ class HappyApps::ChecksInterface < HappyApps::APIClient
 		JSON.parse(response.to_s)
 	end
 
+	def history(id, params={}) 
+		url = "#{@base_url}api/checks/#{id}/history"
+		headers = { params: params, authorization: "Bearer #{@access_token}" }
+		response = RestClient::Request.execute(method: :get, url: url,
+                            timeout: 10, headers: headers)
+		JSON.parse(response.to_s)
+	end
+
 
 	def create(options)
 		url = "#{@base_url}api/checks"
